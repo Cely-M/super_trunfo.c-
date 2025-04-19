@@ -1,0 +1,166 @@
+#include <stdio.h>
+
+int main() {
+    char estado1_nome[50], codigo1[10], cidade1[40];
+    int populacao1, pontosturisticos1;
+    float area1, pib1, densidadepopulacional1, pibpercapita1;
+
+    char estado2_nome[50], codigo2[10], cidade2[40];
+    int populacao2, pontosturisticos2;
+    float area2, pib2, densidadepopulacional2, pibpercapita2;
+
+    int escolha1, escolha2;
+    float estado1_valor1 = 0, estado2_valor1 = 0, estado1_valor2 = 0, estado2_valor2 = 0;
+    const char* nome_atributo1 = "", *nome_atributo2 = "";
+
+    
+    printf("Estado 1: ");
+    scanf("%s", estado1_nome);
+    printf("Digite o codigo da carta 1: ");
+    scanf("%s", codigo1);
+    printf("Cidade 1: ");
+    scanf("%s", cidade1);
+    printf("Populacao 1: ");
+    scanf("%d", &populacao1);
+    printf("Pontos Turisticos 1: ");
+    scanf("%d", &pontosturisticos1);
+    printf("Area 1 (km2): ");
+    scanf("%f", &area1);
+    printf("PIB 1: ");
+    scanf("%f", &pib1);
+
+    densidadepopulacional1 = populacao1 / area1;
+    pibpercapita1 = pib1 / populacao1;
+
+    printf("Densidade Demografica 1: %.2f hab/km²\n", densidadepopulacional1);
+    printf("PIB per Capita 1: %.2f\n", pibpercapita1);
+
+   
+    printf("\nEstado 2: ");
+    scanf("%s", estado2_nome);
+    printf("Digite o codigo da carta 2: ");
+    scanf("%s", codigo2);
+    printf("Cidade 2: ");
+    scanf("%s", cidade2);
+    printf("Populacao 2: ");
+    scanf("%d", &populacao2);
+    printf("Pontos Turisticos 2: ");
+    scanf("%d", &pontosturisticos2);
+    printf("Area 2 (km2): ");
+    scanf("%f", &area2);
+    printf("PIB 2: ");
+    scanf("%f", &pib2);
+
+    densidadepopulacional2 = populacao2 / area2;
+    pibpercapita2 = pib2 / populacao2;
+
+    printf("Densidade Demografica 2: %.2f hab/km²\n", densidadepopulacional2);
+    printf("PIB per Capita 2: %.2f\n", pibpercapita2);
+
+    
+    printf("\nEscolha o primeiro atributo para comparacao:\n");
+    printf("1 - Populacao\n2 - Area\n3 - PIB\n4 - Pontos Turisticos\n5 - Densidade Demografica\n6 - PIB per capita\n");
+    scanf("%d", &escolha1);
+
+    printf("\nEscolha o segundo atributo para comparacao (diferente do primeiro):\n");
+    scanf("%d", &escolha2);
+
+    if (escolha2 == escolha1 || escolha1 < 1 || escolha1 > 6 || escolha2 < 1 || escolha2 > 6) {
+        printf("Erro: os atributos devem ser diferentes e válidos (entre 1 e 6).\n");
+        return 1;
+    }
+
+    
+    if (escolha1 == 1) {
+        estado1_valor1 = populacao1;
+        estado2_valor1 = populacao2;
+        nome_atributo1 = "Populacao";
+    } else if (escolha1 == 2) {
+        estado1_valor1 = area1;
+        estado2_valor1 = area2;
+        nome_atributo1 = "Area";
+    } else if (escolha1 == 3) {
+        estado1_valor1 = pib1;
+        estado2_valor1 = pib2;
+        nome_atributo1 = "PIB";
+    } else if (escolha1 == 4) {
+        estado1_valor1 = pontosturisticos1;
+        estado2_valor1 = pontosturisticos2;
+        nome_atributo1 = "Pontos Turisticos";
+    } else if (escolha1 == 5) {
+        estado1_valor1 = densidadepopulacional1;
+        estado2_valor1 = densidadepopulacional2;
+        nome_atributo1 = "Densidade Demografica";
+    } else if (escolha1 == 6) {
+        estado1_valor1 = pibpercapita1;
+        estado2_valor1 = pibpercapita2;
+        nome_atributo1 = "PIB per capita";
+    }
+
+   
+    if (escolha2 == 1) {
+        estado1_valor2 = populacao1;
+        estado2_valor2 = populacao2;
+        nome_atributo2 = "Populacao";
+    } else if (escolha2 == 2) {
+        estado1_valor2 = area1;
+        estado2_valor2 = area2;
+        nome_atributo2 = "Area";
+    } else if (escolha2 == 3) {
+        estado1_valor2 = pib1;
+        estado2_valor2 = pib2;
+        nome_atributo2 = "PIB";
+    } else if (escolha2 == 4) {
+        estado1_valor2 = pontosturisticos1;
+        estado2_valor2 = pontosturisticos2;
+        nome_atributo2 = "Pontos Turisticos";
+    } else if (escolha2 == 5) {
+        estado1_valor2 = densidadepopulacional1;
+        estado2_valor2 = densidadepopulacional2;
+        nome_atributo2 = "Densidade Demografica";
+    } else if (escolha2 == 6) {
+        estado1_valor2 = pibpercapita1;
+        estado2_valor2 = pibpercapita2;
+        nome_atributo2 = "PIB per capita";
+    }
+
+  
+    float pontos_estado1 = 0, pontos_estado2 = 0;
+
+    printf("\n--- COMPARAÇÃO ---\n");
+    printf("Estado 1: %s | Estado 2: %s\n", estado1_nome, estado2_nome);
+    printf("%s: %.2f x %.2f\n", nome_atributo1, estado1_valor1, estado2_valor1);
+    printf("%s: %.2f x %.2f\n", nome_atributo2, estado1_valor2, estado2_valor2);
+
+ 
+    if (escolha1 == 5) {
+        if (estado1_valor1 < estado2_valor1) pontos_estado1++;
+        else if (estado2_valor1 < estado1_valor1) pontos_estado2++;
+    } else {
+        if (estado1_valor1 > estado2_valor1) pontos_estado1++;
+        else if (estado2_valor1 > estado1_valor1) pontos_estado2++;
+    }
+
+ 
+    if (escolha2 == 5) {
+        if (estado1_valor2 < estado2_valor2) pontos_estado1++;
+        else if (estado2_valor2 < estado1_valor2) pontos_estado2++;
+    } else {
+        if (estado1_valor2 > estado2_valor2) pontos_estado1++;
+        else if (estado2_valor2 > estado1_valor2) pontos_estado2++;
+    }
+
+    printf("\nResultado Final:\n");
+    printf("%s: %.0f ponto(s)\n", estado1_nome, pontos_estado1);
+    printf("%s: %.0f ponto(s)\n", estado2_nome, pontos_estado2);
+
+    if (pontos_estado1 > pontos_estado2) {
+        printf("Vencedor: %s\n", estado1_nome);
+    } else if (pontos_estado2 > pontos_estado1) {
+        printf("Vencedor: %s\n", estado2_nome);
+    } else {
+        printf("Empate!\n");
+    }
+
+    return 0;
+}
